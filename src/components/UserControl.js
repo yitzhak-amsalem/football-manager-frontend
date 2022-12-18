@@ -1,7 +1,7 @@
 import React from "react";
-import {sendApiGetRequest, sendApiPostRequest} from "./ApiRequests";
+import {sendApiGetRequest, sendApiPostRequest} from "../services/ApiRequests";
 
-class Wrapper extends React.Component {
+class UserControl extends React.Component {
     state = {
         responseFromGetRequest: "",
         responseFromPostRequest: "",
@@ -69,4 +69,4 @@ class Wrapper extends React.Component {
     }
 }
 
-export default Wrapper;
+export default UserControl;

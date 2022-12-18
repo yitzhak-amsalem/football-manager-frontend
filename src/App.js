@@ -1,29 +1,33 @@
-import './App.css';
-import {sendApiGetRequest, sendApiPostRequest} from "./ApiRequests";
-import Wrapper from "./Wrapper";
-import {BrowserRouter, Route, Routes} from "react-router-dom";
-import live from "./live";
-import leagueTable from "./leagueTable";
-import leagueTableLive from "./leagueTableLive";
+import './css/App.css';
+
+import {useEffect, useState} from "react";
+import {BrowserRouter, NavLink, Route, Routes, Switch} from "react-router-dom";
+import LeagueTable from "./components/LeagueTable";
+import LeagueTableLive from "./components/LeagueTableLive";
+import LiveGames from "./components/LiveGames";
+import UserControl from "./components/UserControl";
 
 function App() {
 
-
-
-    return (
-        <div className="App">
-            <Wrapper/>
-            <div>
+    return(
+        <div>
             <BrowserRouter>
+                <NavLink className={"active-menu"} to="/"> liveGames </NavLink>
+                <NavLink className={"active-menu"} to="/leagueTable"> leagueTable </NavLink>
+                <NavLink className={"active-menu"} to="/liveLeagueTable"> liveLeagueTable </NavLink>
+                <NavLink className={"active-menu"} to="/userControl"> UserControl </NavLink>
+
+
                 <Routes>
-                    <Route path={"/leagueTableLive"} element={leagueTableLive}/>
-                    <Route path={"/live"} element={live}/>
-                    <Route path={"/leagueTable"} element={leagueTable}/>
+                    <Route path={"/"} element={<LiveGames/>}/>
+                    <Route path={"/leagueTable"} element={<LeagueTable/>}/>
+                    <Route path={"/liveLeagueTable"} element={<LeagueTableLive/>}/>
+                    <Route path={"/userControl"} element={<UserControl/>}/>
                 </Routes>
             </BrowserRouter>
-            </div>
         </div>
-    );
+    )
 }
+
 
 export default App;

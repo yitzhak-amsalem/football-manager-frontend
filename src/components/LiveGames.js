@@ -1,12 +1,36 @@
-import React, {Component} from "react";
-import axios from "axios";
+import React, {Component, useEffect, useState} from "react";
+import LiveGameResults from "./LiveGameResults"
+import {getLiveGames} from "../services/GetLiveGames";
 
-export default function liveGames() {
+export default function LiveGames(props) {
+    const [games, setGames] = useState([]);
+    const [number, setNumber] = useState(props.update);
 
-
+    useEffect(() => {
+        setNumber(props.update)
+        getLiveGames((response) => {
+            if (response) {
+                setGames(response.data)
+                console.log(games)
+            }
+        })
+    }, [props.update])
     return(
         <div>
-            live games
+            <h2>Live Games</h2>
+            <div>number + {number}</div>
+            {
+                games.length === 0 ?
+                    <div>there are no live games</div>
+                    :
+                    <div>
+                        {games.map(game => {
+                            return(
+                                <LiveGameResults game={game}/>
+                            )
+                        })}
+                    </div>
+            }
         </div>
     )
 

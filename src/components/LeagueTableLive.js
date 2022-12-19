@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import axios from "axios";
 
-export default class leagueTableLive extends Component{
+export default class LeagueTableLive extends Component{
     state = {
         table: []
     }

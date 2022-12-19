@@ -1,15 +1,16 @@
 import React from "react";
 import {sendApiGetRequest, sendApiPostRequest} from "../services/ApiRequests";
 
-class UserControl extends React.Component {
-    state = {
+function UserControl(props){
+/*    state = {
         responseFromGetRequest: "",
         responseFromPostRequest: "",
         username: "",
         errorMessage: ""
-    };
+    };*/
 
-    componentDidMount() {
+
+/*    componentDidMount() {
         sendApiPostRequest("http://localhost:8989/sign-in", {
             username: "shai@s111hai",
             password: "123456781"
@@ -31,10 +32,8 @@ class UserControl extends React.Component {
                 }
             }
         })
-    }
+    }*/
 
-
-    render () {
         return (
             <div>
                 <table>
@@ -54,7 +53,8 @@ class UserControl extends React.Component {
                         </td>
                     </tr>
                 </table>
-                {
+                <button onClick={props.setUpdate}>new update</button>
+                {/*{
                     this.state.username.length > 0 &&
                     <div>
                         Hello: {this.state.username}
@@ -62,11 +62,12 @@ class UserControl extends React.Component {
                 }
                 {
                     this.state.errorMessage
-                }
+                }*/}
 
             </div>
+
         )
-    }
+
 }
 
 export default UserControl;

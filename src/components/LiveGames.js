@@ -8,10 +8,11 @@ export default function LiveGames(props) {
 
     useEffect(() => {
         setNumber(props.update)
-        getLiveGames((response) => {
-            setGames(response.data)
-            console.log(games)
-        })
+            getLiveGames((response) => {
+                setGames(response.data)
+                console.log(games)
+            })
+
     }, [props.update])
     return(
         <div>

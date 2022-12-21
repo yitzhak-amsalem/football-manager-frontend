@@ -1,0 +1,17 @@
+body {
+    background-image: url("../images/soccer-players-action-professional-stadium.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+h2 {
+    font-family: 'Chivo Mono', monospace;
+    font-size: 3em;
+}
+.teams {
+    font-family: 'Chivo Mono', monospace;
+    font-size: 2em;
+
+}
+.goals {
+    font-weight: bold;
+}

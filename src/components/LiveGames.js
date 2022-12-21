@@ -1,6 +1,7 @@
 import React, {Component, useEffect, useState} from "react";
 import LiveGameResults from "./LiveGameResults"
 import {getLiveGames} from "../services/GetLiveGames";
+import "../css/LiveGamesStyle.css"
 
 export default function LiveGames(props) {
     const [games, setGames] = useState([]);
@@ -17,7 +18,6 @@ export default function LiveGames(props) {
     return(
         <div>
             <h2>Live Games</h2>
-            <div>number + {number}</div>
             {
                 games.length === 0 ?
                     <div>there are no live games</div>

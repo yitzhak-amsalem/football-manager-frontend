@@ -1,6 +1,7 @@
 import React, {Component, useEffect, useState} from "react";
 import LiveGameResults from "./LiveGameResults"
 import {getLiveGames} from "../services/GetLiveGames";
+import "../css/LiveGamesStyle.css"
 
 export default function LiveGames(props) {
     const [games, setGames] = useState([]);

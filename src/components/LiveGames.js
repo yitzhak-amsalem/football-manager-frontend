@@ -18,7 +18,6 @@ export default function LiveGames(props) {
     return(
         <div>
             <h2>Live Games</h2>
-            <div>number + {number}</div>
             {
                 games.length === 0 ?
                     <div>there are no live games</div>

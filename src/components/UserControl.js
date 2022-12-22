@@ -2,77 +2,78 @@ import React, {useCallback, useEffect, useState} from "react";
 import CreateLiveGame from "./CreateLiveGame";
 import {sendApiGetRequest, sendApiPostRequest} from "../services/ApiRequests";
 import "../css/logIn.css";
+import {TextField} from "@mui/material";
 
 
+function UserControl(props) {
+    const [isActive, setIsActive] = useState(false);
+    const [userName, setUserName] = useState("manager");
+    const [password, setPassword] = useState("12345678");
+    const [user, setUser] = useState({})
 
-function UserControl(props){
-    const [isActive,setIsActive] = useState(true);
-    const updateIsActive=()=>{
-        /*setIsActive(prevState =>  {login(props={userName,password})})*/
-        sendApiPostRequest("http://localhost:8989/log-in", {username:userName, password:password}, (response) => {
-
-            if(response.data.success){
+    const updateIsActive = () => {
+        sendApiPostRequest("http://localhost:8989/login", {userName: userName, password: password}, (response) => {
+            if (response.data.success) {
                 setIsActive(true);
-            }
-            else {
-                if (response.data.errorCode === 1){
-                    alert("The  password isn't correct");
+                setUser(response.data.user)
+            } else {
+                if (response.data.errorCode === 1) {
+                    alert("The password isn't correct");
+                } else {
+                    alert("The username isn't correct");
                 }
-                else{
-                    alert("The  username isn't correct");
-                }
-                setIsActive(false);
             }
-
         })
     }
 
-    const [userName,setUserName]=useState("");
     const updateUserName = (e) => {
-        setUserName( prevState => e.target.value);
+        setUserName(e.target.value);
     }
-    const [password,setPassword]=useState("");
     const updatePassword = (e) => {
-        setPassword( prevState => e.target.value);
+        setPassword(e.target.value);
     }
-    const logOut=()=>{
+    const logOut = () => {
         setIsActive(false);
     }
 
-
-
-        return (
-            <div>
-                {isActive ?
+    return (
+        <div>
+            {
+                isActive ?
                     <div>
-                    <CreateLiveGame  />
-                    <button onClick={logOut}>log out</button>
+                        <CreateLiveGame user={user}/>
+                        <button id={"sign-out-button"} onClick={logOut}>Sign out</button>
                     </div>
                     :
-                    <div>
-                    <table>
-                        <tr>
-                            <td>
-                                <input onChange={updateUserName} placeholder={"Enter your username"}/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input onChange={updatePassword} placeholder={"Enter your password"}/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <button disabled={userName.length==0 || password.length==0} onClick={updateIsActive}>Sign In</button>
-                            </td>
-                        </tr>
-                    </table>
-
+                    <div className={"login-container"}>
+                        <TextField
+                            style={{margin: "5px", backgroundColor: "#bdf0f5"}}
+                            id={"filled-basic"}
+                            variant={"filled"}
+                            label={"Enter your user name"}
+                            value={userName}
+                            onChange={updateUserName}
+                            required
+                        />
+                        <TextField
+                            style={{margin: "5px", backgroundColor: "#bdf0f5"}}
+                            id="filled-password-input"
+                            label="Password"
+                            type="password"
+                            autoComplete="current-password"
+                            variant="filled"
+                            value={password}
+                            onChange={updatePassword}
+                            required
+                        />
+                        <button id={"sign-in-button"} disabled={userName.length === 0 || password.length === 0}
+                                onClick={updateIsActive}>Sign In
+                        </button>
                     </div>
-                }
-            </div>
+            }
+        </div>
 
-        )
+    )
 
 }
 

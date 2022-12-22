@@ -14,7 +14,7 @@ export default function LiveGames(props) {
             setGames(games)
         })
 
-    }, [props.update])
+    }, )
 
     return (
         <div className={"live-games"}>

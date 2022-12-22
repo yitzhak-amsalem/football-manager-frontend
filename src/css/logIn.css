@@ -1,25 +1,62 @@
+.goals-input {
+    width: 50px;
+}
 
-
- input
-{
-    display: block;
-    width: auto;
-    height: auto;
-    border: none;
-    outline: none;
-    box-shadow: none;
-    background: none;
-    border-radius: 0px;
+.login-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 20px;
 }
 
 
 button {
     margin-top: 20px;
-    border: none;
     font-size: 1.6em;
     font-weight: 300;
-    padding: 5px 0;
-    width: 100%;
-    border-radius: 3px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+#add-game-button {
+    width: 45px;
+    border-radius: 50%;
+    border: 2px solid #00654c;
+
+}
+
+#add-game-button:hover {
+    background-color: #01503d;
+    transition: all 500ms;
+    color: white;
+    width: 45px;
+    border-radius: 50%;
+}
+
+#sign-out-button {
+    font-family: 'Chivo Mono', monospace;
+    border: none;
+    background-color: rgba(98, 245, 203, 0.8);
+    margin-top: 50px;
+    border-radius: 10%;
+}
+
+#sign-out-button:hover {
+    background-color: #00795a;
+    transition: all 500ms;
+    color: white;
+}
+
+#sign-in-button {
+    font-family: 'Chivo Mono', monospace;
+    border: none;
+    background-color: #bdf0f5;
+}
+
+#sign-in-button:hover {
+    background-color: #00795a;
+    transition: all 500ms;
+    color: white;
+    border: 2px solid #bdf0f5;
 }
 

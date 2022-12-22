@@ -12,7 +12,7 @@ export default function LeagueTableLive() {
             const updatedTable = response.data;
             setLeagueTableLive(updatedTable);
         })
-    }, []);
+    }, );
 
     return (
         <div className={"league-table live"}>

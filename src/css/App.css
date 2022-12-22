@@ -71,11 +71,11 @@ body {
 
 .nav li.active {
   background-color: #031870;
+
 }
 
 .nav li:hover {
   transition: all 500ms;
-
   background-color: #031870;
 }
 

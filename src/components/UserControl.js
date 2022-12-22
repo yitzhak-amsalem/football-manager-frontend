@@ -6,7 +6,7 @@ import "../css/logIn.css";
 
 
 function UserControl(props){
-    const [isActive,setIsActive]=useState(true);
+    const [isActive,setIsActive] = useState(true);
     const updateIsActive=()=>{
         /*setIsActive(prevState =>  {login(props={userName,password})})*/
         sendApiPostRequest("http://localhost:8989/log-in", {username:userName, password:password}, (response) => {
@@ -15,7 +15,7 @@ function UserControl(props){
                 setIsActive(true);
             }
             else {
-                if (response.data.errorCode==1 ){
+                if (response.data.errorCode === 1){
                     alert("The  password isn't correct");
                 }
                 else{

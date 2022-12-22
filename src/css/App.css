@@ -9,7 +9,9 @@
 }
 
 body {
-  margin: 0;
+  background-image: url("../images/soccer-players-action-professional-stadium.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .container {
@@ -64,7 +66,7 @@ body {
   display: flex;
   align-items: center;
   padding: 1rem;
-  border-left: 2px solid #031870;
+  border-left: 4px solid #031870;
 }
 
 .nav li.active {

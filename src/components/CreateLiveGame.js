@@ -5,15 +5,15 @@ import {sendApiGetRequest, sendApiPostRequest} from "../services/ApiRequests";
 
 
 function CreateLiveGame(props){
-const [group1,setGroup1]=useState("");
+const [group1,setGroup1]=useState("-1");
     const updateGroup1 = (e) => {
         setGroup1( prevState =>  e.target.value);
     }
-    const [group2,setGroup2]=useState("");
+    const [group2,setGroup2]=useState("-1");
     const updateGroup2 = (e) => {
         setGroup2( prevState =>  e.target.value);
     }
-    const [table,setTable]=useState([""]);
+    const [teams,setTeams]=useState([]);
  /*   const updateTable=(groupName)=>{
         let newTable=[];
         setTable(prevState => prevState.map((i)=>{
@@ -36,14 +36,16 @@ const [group1,setGroup1]=useState("");
     const [goalsGroupA,setGoalsGroupA]=useState(0);
     const [goalsGroupB,setGoalsGroupB]=useState(0);
     const updateGoalsGroupA=(e)=>{
-        setGoalsGroupA(prevState => e.target.value);
+        setGoalsGroupA(e.target.value);
+        console.log(goalsGroupA)
         sendApiPostRequest("http://localhost:8989/update-goals",
             {groupAName:group1,groupBName:group2,goalsGroupA:goalsGroupA,goalsGroupB:goalsGroupB}
             ,(response)=>{
         })
     }
     const updateGoalsGroupB=(e)=>{
-        setGoalsGroupB(prevState => e.target.value);
+        setGoalsGroupB(e.target.value);
+        console.log(goalsGroupB)
         sendApiPostRequest("http://localhost:8989/update-goals",
             {groupAName:group1,groupBName:group2,goalsGroupA:goalsGroupA,goalsGroupB:goalsGroupB}
             ,(response)=>{
@@ -59,10 +61,12 @@ const [group1,setGroup1]=useState("");
      useEffect(()=> {
         sendApiGetRequest("http://localhost:8989/get-available-groups",(response)=>{
             let res=response.data;
-            setTable(prevState => res);
+            setTeams(res);
             console.log(res);
         })
     },[])
+    const teams1 = teams.filter(team => team!==group2);
+    const teams2 = teams.filter(team => team!==group1);
 
 
     return(
@@ -72,9 +76,9 @@ const [group1,setGroup1]=useState("");
                     {!itFinish &&
                         <div>
                         <label>{group1}</label>
-                        <input onChange={updateGoalsGroupA} type="number" min="0" placeholder={"Enter the goals of group "+{group1}} value={goalsGroupA}/>
+                        <input onInput={updateGoalsGroupA} type="number" min="0" placeholder={"Enter the goals of group "+{group1}} value={goalsGroupA}/>
                         <label>{group2}</label>
-                        <input onChange={updateGoalsGroupB} type="number" min="0" placeholder={"Enter the goals of group "+{group2}} value={goalsGroupB}/>
+                        <input onKeyUp={updateGoalsGroupB} type="number" min="0" placeholder={"Enter the goals of group "+{group2}} value={goalsGroupB}/>
                         <button disabled={goalsGroupA==null||goalsGroupB==null} onClick={finishGame}>finish game</button>
                         <button disabled={game} onClick={addGame}>add game</button>
                         </div>}
@@ -88,20 +92,21 @@ const [group1,setGroup1]=useState("");
                 :
                 <div>
                 <select  onChange={updateGroup1} value={group1}>
+                    <option value={-1} disabled={true}>Group 1</option>
                     {
-                        table.map(team => {
+                        teams1.map(team => {
                             return (
-                                <option placeholder="group1">{team}</option>
+                                <option value={team}>{team}</option>
                             )
-
                         })
                     }
                 </select>
                 <select onChange={updateGroup2} value={group2} >
+                    <option value={-1} disabled={true}>Group 2</option>
             {
-                table.map(team =>{
+                teams2.map(team =>{
                 return(
-                <option >{team}</option>
+                <option value={team}>{team}</option>
                 )
 
             })
@@ -110,7 +115,7 @@ const [group1,setGroup1]=useState("");
             }
                 </select>
 
-                <button  onClick={saveGame}>Save Game</button>
+                <button disabled={group1 === "-1" || group2 === "-1"} onClick={saveGame}>Save Game</button>
                 </div>
             }
 

@@ -52,13 +52,6 @@ function CreateLiveGame(props) {
             })
     }
 
-    const updateGoalsGroupA = (goals) => {
-        setGoalsGroupA(goals);
-        sendApiPostRequest("http://localhost:8989/update-goals",
-            {groupAName: group1, groupBName: group2, goalsGroupA: goalsGroupA, goalsGroupB: goalsGroupB}
-            , (response) => {
-            })
-    }
     const updateGoals = (goalsA, goalsB, groupA, groupB) => {
         console.log(goalsA + goalsB)
         sendApiPostRequest("http://localhost:8989/update-goals",
@@ -66,6 +59,7 @@ function CreateLiveGame(props) {
             , (response) => {
             })
     }
+
     const finishGame = (group1, group2) => {
         sendApiPostRequest("http://localhost:8989/finish-game", {
             group1Name: group1,
@@ -78,23 +72,25 @@ function CreateLiveGame(props) {
     return (
         <div>
             {
-                userGames.length > 0 &&
-                <div>
-                    {
-                        userGames.map((game) => {
-                                return (
-                                    <div >
-                                        <UserLives updateGoals={updateGoals} endGame={finishGame} game={game}/>
-                                    </div>
-                                )
-                            }
-                        )}
-                </div>
+                userGames.length > 0 ?
+                    <div>
+                        {
+                            userGames.map((game) => {
+                                    return (
+                                        <div>
+                                            <UserLives updateGoals={updateGoals} endGame={finishGame} game={game}/>
+                                        </div>
+                                    )
+                                }
+                            )}
+                    </div>
+                    :
+                    <h2 style={{color: "#005742"}}>no games. to add a new game press +</h2>
             }
             {addMoreGame &&
                 <div className={"select-game"}>
                     <div>
-                        <FormControl sx={{ m: 1, width: 200 }} style={{backgroundColor: "rgba(108,255,211,0.5)"}}>
+                        <FormControl sx={{m: 1, width: 200}} style={{backgroundColor: "rgba(108,255,211,0.5)"}}>
                             <InputLabel id="demo-simple-select-label">Group A</InputLabel>
                             <Select
                                 labelId="demo-simple-select-label"
@@ -115,7 +111,7 @@ function CreateLiveGame(props) {
                             </Select>
                         </FormControl>
 
-                        <FormControl sx={{ m: 1, width: 200 }} style={{backgroundColor: "rgba(108,255,211,0.5)"}}>
+                        <FormControl sx={{m: 1, width: 200}} style={{backgroundColor: "rgba(108,255,211,0.5)"}}>
                             <InputLabel id="demo-simple-select-label">Group B</InputLabel>
                             <Select
                                 labelId="demo-simple-select-label"
@@ -135,16 +131,18 @@ function CreateLiveGame(props) {
                             </Select>
                         </FormControl>
                     </div>
-                    <button id={"start-button"} disabled={group1 === "-1" || group2 === "-1"} onClick={saveGame}>Start Game</button>
+                    <button id={"start-button"} disabled={group1 === "-1" || group2 === "-1"} onClick={saveGame}>Start
+                        Game
+                    </button>
                 </div>
             }
-                <div>
-                   <button id={"add-game-button"} onClick={() => {
-                       setAddMoreGame(prevState => !prevState)
-                       setGroup1("-1")
-                       setGroup2("-1")
-                   }}>{addMoreGame ? "-":"+"}</button>
-                </div>
+            <div>
+                <button id={"add-game-button"} onClick={() => {
+                    setAddMoreGame(prevState => !prevState)
+                    setGroup1("-1")
+                    setGroup2("-1")
+                }}>{addMoreGame ? "-" : "+"}</button>
+            </div>
         </div>
     )
 }

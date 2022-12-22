@@ -3,15 +3,69 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
 }
+
 h2 {
     font-family: 'Chivo Mono', monospace;
     font-size: 3em;
 }
+
 .teams {
     font-family: 'Chivo Mono', monospace;
     font-size: 2em;
 
 }
+
 .goals {
     font-weight: bold;
 }
+
+.live-games-table {
+    background-color: rgba(209, 234, 246, 0.8);
+    margin-top: 5px;
+    border-collapse: collapse;
+    font-family: 'Chivo Mono', monospace;
+    font-size: 1.2em;
+    border-radius: 1px 1px 1px 1px;
+    overflow: hidden;
+    box-shadow: 0 0 30px rgba(189, 222, 255, 0.6);
+    border-bottom: 1px solid #0e499f;
+    width: 460px;
+}
+
+.live-games-table tr:hover {
+    color: black;
+    background-color: rgba(144, 186, 250, 0.5);
+}
+
+#left-td {
+    width: 160px;
+    text-align: left;
+    border-bottom: 2px solid #00795a;
+
+}
+
+#right-td {
+    width: 160px;
+    text-align: right;
+    border-bottom: 2px solid #00795a;
+
+}
+
+#left-td-g {
+    text-align: left;
+    border-bottom: 2px solid #00795a;
+
+}
+
+#right-td-g {
+    text-align: right;
+    border-bottom: 2px solid #00795a;
+
+}
+
+#center-td {
+    text-align: center;
+    border-bottom: 2px solid #00795a;
+
+}
+

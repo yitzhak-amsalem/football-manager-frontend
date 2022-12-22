@@ -14,9 +14,9 @@ function App() {
     const setUpdate = () => {
         setUpdates(prevState => prevState + 1);
     }
-    return(
+    return (
         <>
-            <Navbar />
+            <Navbar/>
             <div className="container">
                 <div>
                     <Routes>
@@ -31,4 +31,5 @@ function App() {
 
     )
 }
+
 export default App;

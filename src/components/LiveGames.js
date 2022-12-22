@@ -1,4 +1,4 @@
-import React, {Component, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import LiveGameResults from "./LiveGameResults"
 import {getLiveGames} from "../services/GetLiveGames";
 import "../css/LiveGamesStyle.css"
@@ -9,22 +9,23 @@ export default function LiveGames(props) {
 
     useEffect(() => {
         setNumber(props.update)
-            getLiveGames((response) => {
-                setGames(response.data)
-                console.log(games)
-            })
+        getLiveGames((response) => {
+            const games = response.data;
+            setGames(games)
+        })
 
     }, [props.update])
-    return(
-        <div>
+
+    return (
+        <div className={"live-games"}>
             <h2>Live Games</h2>
             {
                 games.length === 0 ?
-                    <div>there are no live games</div>
+                    <h2>oops! there are no live games</h2>
                     :
                     <div>
                         {games.map(game => {
-                            return(
+                            return (
                                 <LiveGameResults game={game}/>
                             )
                         })}

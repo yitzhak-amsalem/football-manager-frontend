@@ -12,29 +12,26 @@ function CreateLiveGame(props) {
     const [teams, setTeams] = useState([]);
     const [userGames, setUserGames] = useState([]);
     const [addMoreGame, setAddMoreGame] = useState(false);
-    const [goalsGroupA, setGoalsGroupA] = useState(0);
-    const [goalsGroupB, setGoalsGroupB] = useState(0);
-    const [itFinish, setItFinish] = useState(false);
 
-    const teams1 = teams.filter(team => team !== group2);
-    const teams2 = teams.filter(team => team !== group1);
+    const availableTeamsForA = teams.filter(team => team !== group2);
+    const availableTeamsForB = teams.filter(team => team !== group1);
 
     useEffect(() => {
+        getUserGames();
+        getAvailableGroups();
+    }, [userGames, teams, addMoreGame])
+
+    const getAvailableGroups = () => {
         sendApiGetRequest("http://localhost:8989/get-available-groups", (response) => {
             const res = response.data;
             setTeams(res);
-            console.log(res);
         })
-    }, [])
-    useEffect(() => {
-        getUserGames();
-    }, [])
+    }
 
     const getUserGames = () => {
         getUserLives(props.user.token, (response) => {
             const userGames = response.data;
             setUserGames(userGames);
-            console.log(userGames)
         })
     }
 
@@ -47,25 +44,24 @@ function CreateLiveGame(props) {
     const saveGame = () => {
         sendApiPostRequest("http://localhost:8989/save-game",
             {group1Name: group1, group2Name: group2, token: props.user.token}, (response) => {
-                getUserGames();
                 setAddMoreGame(false)
             })
     }
 
     const updateGoals = (goalsA, goalsB, groupA, groupB) => {
-        console.log(goalsA + goalsB)
         sendApiPostRequest("http://localhost:8989/update-goals",
             {groupAName: groupA, groupBName: groupB, goalsGroupA: goalsA, goalsGroupB: goalsB}
             , (response) => {
             })
     }
 
-    const finishGame = (group1, group2) => {
+    const endGame = (group1, group2) => {
         sendApiPostRequest("http://localhost:8989/finish-game", {
             group1Name: group1,
             group2Name: group2
         }, (response) => {
             getUserGames();
+            getAvailableGroups();
         })
     }
 
@@ -78,7 +74,7 @@ function CreateLiveGame(props) {
                             userGames.map((game) => {
                                     return (
                                         <div>
-                                            <UserLives updateGoals={updateGoals} endGame={finishGame} game={game}/>
+                                            <UserLives updateGoals={updateGoals} endGame={endGame} game={game}/>
                                         </div>
                                     )
                                 }
@@ -102,7 +98,7 @@ function CreateLiveGame(props) {
                             >
                                 <MenuItem value={-1} disabled={true}>Group A</MenuItem>
                                 {
-                                    teams1.map(team => {
+                                    availableTeamsForA.map(team => {
                                         return (
                                             <MenuItem value={team}>{team}</MenuItem>
                                         )
@@ -122,7 +118,7 @@ function CreateLiveGame(props) {
                             >
                                 <MenuItem value={-1} disabled={true}>Group A</MenuItem>
                                 {
-                                    teams2.map(team => {
+                                    availableTeamsForB.map(team => {
                                         return (
                                             <MenuItem value={team}>{team}</MenuItem>
                                         )
@@ -137,7 +133,7 @@ function CreateLiveGame(props) {
                 </div>
             }
             <div>
-                <button id={"add-game-button"} onClick={() => {
+                <button disabled={teams.length === 0} id={"add-game-button"} onClick={() => {
                     setAddMoreGame(prevState => !prevState)
                     setGroup1("-1")
                     setGroup2("-1")

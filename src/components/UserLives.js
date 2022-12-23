@@ -18,7 +18,7 @@ export default function UserLives(props) {
                             setGoalsGroupA(goalsGroupA + 1)
                             props.updateGoals(goalsGroupA+1, goalsGroupB, groupA, groupB)
                         }}>+</button>
-                        <button className={"goals-button"} onClick={() => {
+                        <button disabled={goalsGroupA === 0} className={"goals-button"} onClick={() => {
                             setGoalsGroupA(goalsGroupA - 1)
                             props.updateGoals(goalsGroupA-1, goalsGroupB, groupA, groupB)
                         }}>-</button>
@@ -37,7 +37,7 @@ export default function UserLives(props) {
                             setGoalsGroupB(goalsGroupB + 1)
                             props.updateGoals(goalsGroupA, goalsGroupB+1, groupA, groupB)
                         }}>+</button>
-                        <button className={"goals-button"} onClick={() => {
+                        <button disabled={goalsGroupB === 0} className={"goals-button"} onClick={() => {
                             setGoalsGroupB(goalsGroupB - 1)
                             props.updateGoals(goalsGroupA, goalsGroupB-1, groupA, groupB)
                         }}>-</button>

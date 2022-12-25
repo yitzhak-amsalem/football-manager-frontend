@@ -19,7 +19,7 @@ function CreateLiveGame(props) {
     useEffect(() => {
         getUserGames();
         getAvailableGroups();
-    }, [userGames, teams, addMoreGame])
+    }, [addMoreGame])
 
     const getAvailableGroups = () => {
         sendApiGetRequest("http://localhost:8989/get-available-groups", (response) => {
@@ -52,6 +52,8 @@ function CreateLiveGame(props) {
         sendApiPostRequest("http://localhost:8989/update-goals",
             {groupAName: groupA, groupBName: groupB, goalsGroupA: goalsA, goalsGroupB: goalsB}
             , (response) => {
+                getUserGames();
+                getAvailableGroups();
             })
     }
 

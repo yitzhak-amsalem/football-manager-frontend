@@ -1,9 +1,43 @@
-
-
 h2 {
     font-family: 'Chivo Mono', monospace;
     font-size: 3em;
 }
+
+.live-games{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.live-titles {
+    color: #0f1f54;
+    animation: color-change 2s linear infinite;
+    width: 350px;
+    text-align: center;
+    background-color: rgba(155, 194, 252, 0.3);
+    box-shadow: 0 0 4px 4px #2753a6;
+}
+
+@keyframes color-change {
+    0%,100%{
+        box-shadow: 0 0 4px 4px #14397e;
+    }
+
+    25%{
+        box-shadow: 0 0 4px 4px #6588cc;
+    }
+
+    50%{
+        box-shadow: 0 0 4px 4px #8da8dc;
+    }
+
+    75%{
+        box-shadow: 0 0 4px 4px #2753a6;
+    }
+}
+
 #main-container{
     display: flex;
     align-items: center;

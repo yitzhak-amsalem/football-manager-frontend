@@ -11,7 +11,7 @@ h2 {
     text-align: center;
 }
 
-.live-titles {
+.live-title {
     color: #0f1f54;
     animation: color-change 2s linear infinite;
     width: 350px;

@@ -18,12 +18,12 @@ export default function LiveGames(props) {
 
     return (
         <div className={"live-games"}>
-            <h2 className={"live-titles"} id={"live-title1"}>Live Games</h2>
             {
                 games.length === 0 ?
-                    <h2>oops! there are no live games</h2>
+                    <h2 style={{color: "#0f1f54"}}>Oops! there are no live games.</h2>
                     :
                     <div>
+                        <h2 className={"live-title"}>Live Games</h2>
                         {games.map(game => {
                             return (
                                 <LiveGameResults game={game}/>

@@ -37,7 +37,7 @@ function UserControl(props) {
     }
 
     return (
-        <div>
+        <div style={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center"}}>
             {
                 isActive ?
                     <div>
@@ -45,30 +45,33 @@ function UserControl(props) {
                         <button id={"sign-out-button"} onClick={logOut}>Sign out</button>
                     </div>
                     :
-                    <div className={"login-container"}>
-                        <TextField
-                            style={{margin: "5px", backgroundColor: "#bdf0f5"}}
-                            id={"filled-basic"}
-                            variant={"filled"}
-                            label={"Enter your user name"}
-                            value={userName}
-                            onChange={updateUserName}
-                            required
-                        />
-                        <TextField
-                            style={{margin: "5px", backgroundColor: "#bdf0f5"}}
-                            id="filled-password-input"
-                            label="Password"
-                            type="password"
-                            autoComplete="current-password"
-                            variant="filled"
-                            value={password}
-                            onChange={updatePassword}
-                            required
-                        />
-                        <button id={"sign-in-button"} disabled={userName.length === 0 || password.length === 0}
-                                onClick={updateIsActive}>Sign In
-                        </button>
+                    <div className={"login-form"}>
+                        <h1>Login Form</h1>
+                        <div className={"login-container"}>
+                            <TextField
+                                style={{margin: "10px", width: "200px"}}
+                                id={"filled-basic"}
+                                variant={"filled"}
+                                label={"Enter your user name"}
+                                value={userName}
+                                onChange={updateUserName}
+                                required
+                            />
+                            <TextField
+                                style={{margin: "10px", width: "200px"}}
+                                id="filled-password-input"
+                                label="Password"
+                                type="password"
+                                autoComplete="current-password"
+                                variant="filled"
+                                value={password}
+                                onChange={updatePassword}
+                                required
+                            />
+                            <button id={"sign-in-button"} disabled={userName.length === 0 || password.length === 0}
+                                    onClick={updateIsActive}>Sign In
+                            </button>
+                        </div>
                     </div>
             }
         </div>

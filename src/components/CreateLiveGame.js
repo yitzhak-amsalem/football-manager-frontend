@@ -7,14 +7,14 @@ import "../css/logIn.css"
 import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 
 function CreateLiveGame(props) {
-    const [group1, setGroup1] = useState("-1");
-    const [group2, setGroup2] = useState("-1");
-    const [teams, setTeams] = useState([]);
+    const [groupA, setGroupA] = useState("-1");
+    const [groupB, setGroupB] = useState("-1");
+    const [availableTeams, setAvailableTeams] = useState([]);
     const [userGames, setUserGames] = useState([]);
     const [addMoreGame, setAddMoreGame] = useState(false);
 
-    const availableTeamsForA = teams.filter(team => team !== group2);
-    const availableTeamsForB = teams.filter(team => team !== group1);
+    const availableTeamsForA = availableTeams.filter(team => team !== groupB);
+    const availableTeamsForB = availableTeams.filter(team => team !== groupA);
 
     useEffect(() => {
         getUserGames();
@@ -24,26 +24,26 @@ function CreateLiveGame(props) {
     const getAvailableGroups = () => {
         sendApiGetRequest("http://localhost:8989/get-available-groups", (response) => {
             const res = response.data;
-            setTeams(res);
+            setAvailableTeams(res);
         })
     }
 
     const getUserGames = () => {
-        getUserLives(props.user.token, (response) => {
+        getUserLives(props.userToken, (response) => {
             const userGames = response.data;
             setUserGames(userGames);
         })
     }
 
-    const updateGroup1 = (e) => {
-        setGroup1(e.target.value);
+    const updateGroupA = (e) => {
+        setGroupA(e.target.value);
     }
-    const updateGroup2 = (e) => {
-        setGroup2(e.target.value);
+    const updateGroupB = (e) => {
+        setGroupB(e.target.value);
     }
     const saveGame = () => {
         sendApiPostRequest("http://localhost:8989/save-game",
-            {group1Name: group1, group2Name: group2, token: props.user.token}, (response) => {
+            {groupAName: groupA, groupBName: groupB, token: props.userToken}, (response) => {
                 setAddMoreGame(false)
             })
     }
@@ -53,14 +53,13 @@ function CreateLiveGame(props) {
             {groupAName: groupA, groupBName: groupB, goalsGroupA: goalsA, goalsGroupB: goalsB}
             , (response) => {
                 getUserGames();
-                getAvailableGroups();
             })
     }
 
-    const endGame = (group1, group2) => {
-        sendApiPostRequest("http://localhost:8989/finish-game", {
-            group1Name: group1,
-            group2Name: group2
+    const endGame = (groupA, groupB) => {
+        sendApiPostRequest("http://localhost:8989/end-game", {
+            groupAName: groupA,
+            groupBName: groupB
         }, (response) => {
             getUserGames();
             getAvailableGroups();
@@ -85,7 +84,8 @@ function CreateLiveGame(props) {
                     :
                     <h2 style={{color: "#005742"}}>no games. to add a new game press +</h2>
             }
-            {addMoreGame &&
+            {
+                addMoreGame &&
                 <div className={"select-game"}>
                     <div>
                         <FormControl sx={{m: 1, width: 200}} style={{backgroundColor: "rgba(108,255,211,0.5)"}}>
@@ -93,10 +93,9 @@ function CreateLiveGame(props) {
                             <Select
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
-                                value={group1}
+                                value={groupA}
                                 label="Age"
-                                onChange={updateGroup1}
-                                outline
+                                onChange={updateGroupA}
                             >
                                 <MenuItem value={-1} disabled={true}>Group A</MenuItem>
                                 {
@@ -114,11 +113,11 @@ function CreateLiveGame(props) {
                             <Select
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
-                                value={group2}
+                                value={groupB}
                                 label="Age"
-                                onChange={updateGroup2}
+                                onChange={updateGroupB}
                             >
-                                <MenuItem value={-1} disabled={true}>Group A</MenuItem>
+                                <MenuItem value={-1} disabled={true}>Group B</MenuItem>
                                 {
                                     availableTeamsForB.map(team => {
                                         return (
@@ -129,16 +128,16 @@ function CreateLiveGame(props) {
                             </Select>
                         </FormControl>
                     </div>
-                    <button id={"start-button"} disabled={group1 === "-1" || group2 === "-1"} onClick={saveGame}>Start
+                    <button id={"start-button"} disabled={groupA === "-1" || groupB === "-1"} onClick={saveGame}>Start
                         Game
                     </button>
                 </div>
             }
             <div>
-                <button disabled={teams.length === 0} id={"add-game-button"} onClick={() => {
+                <button disabled={availableTeams.length === 0} id={"add-game-button"} onClick={() => {
                     setAddMoreGame(prevState => !prevState)
-                    setGroup1("-1")
-                    setGroup2("-1")
+                    setGroupA("-1")
+                    setGroupB("-1")
                 }}>{addMoreGame ? "-" : "+"}</button>
             </div>
         </div>

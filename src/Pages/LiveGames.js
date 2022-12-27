@@ -1,19 +1,16 @@
 import React, {useEffect, useState} from "react";
-import LiveGameResults from "./LiveGameResults"
+import LiveGameResults from "../components/LiveGameResults"
 import {getLiveGames} from "../services/GetLiveGames";
 import "../css/LiveGamesStyle.css"
 
-export default function LiveGames(props) {
+export default function LiveGames() {
     const [games, setGames] = useState([]);
-    const [number, setNumber] = useState(props.update);
 
     useEffect(() => {
-        setNumber(props.update)
         getLiveGames((response) => {
             const games = response.data;
             setGames(games)
         })
-
     }, )
 
     return (

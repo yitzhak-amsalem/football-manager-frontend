@@ -1,21 +1,21 @@
 import React, {useCallback, useEffect, useState} from "react";
-import CreateLiveGame from "./CreateLiveGame";
-import {sendApiGetRequest, sendApiPostRequest} from "../services/ApiRequests";
+import CreateLiveGame from "../components/CreateLiveGame";
+import {sendApiPostRequest} from "../services/ApiRequests";
 import "../css/logIn.css";
 import {TextField} from "@mui/material";
 
 
-function UserControl(props) {
+function UserControl() {
     const [isActive, setIsActive] = useState(false);
-    const [userName, setUserName] = useState("manager");
-    const [password, setPassword] = useState("12345678");
-    const [user, setUser] = useState({})
+    const [userName, setUserName] = useState("");
+    const [password, setPassword] = useState("");
+    const [userToken, setUserToken] = useState("");
 
     const updateIsActive = () => {
         sendApiPostRequest("http://localhost:8989/login", {userName: userName, password: password}, (response) => {
             if (response.data.success) {
                 setIsActive(true);
-                setUser(response.data.user)
+                setUserToken(response.data.userToken)
             } else {
                 if (response.data.errorCode === 1) {
                     alert("The password isn't correct");
@@ -41,7 +41,7 @@ function UserControl(props) {
             {
                 isActive ?
                     <div>
-                        <CreateLiveGame user={user}/>
+                        <CreateLiveGame userToken={userToken}/>
                         <button id={"sign-out-button"} onClick={logOut}>Sign out</button>
                     </div>
                     :

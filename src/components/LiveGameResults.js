@@ -22,7 +22,6 @@ export default function LiveGameResults(props) {
                 </tr>
                 </tbody>
             </table>
-
         </div>
     )
 

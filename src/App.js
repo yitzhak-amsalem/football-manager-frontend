@@ -1,29 +1,24 @@
 import './css/App.css';
-import {BrowserRouter, NavLink, Route, Routes} from "react-router-dom";
-import LeagueTable from "./components/LeagueTable";
-import LeagueTableLive from "./components/LeagueTableLive";
-import LiveGames from "./components/LiveGames";
-import UserControl from "./components/UserControl";
-import {useState} from "react";
+import {Route, Routes} from "react-router-dom";
+import LeagueTable from "./Pages/LeagueTable";
+import LeagueTableLive from "./Pages/LeagueTableLive";
+import LiveGames from "./Pages/LiveGames";
+import UserControl from "./Pages/UserControl";
 
 import Navbar from "./Navbar"
 
 
 function App() {
-    const [updates, setUpdates] = useState(0);
-    const setUpdate = () => {
-        setUpdates(prevState => prevState + 1);
-    }
     return (
         <>
             <Navbar/>
             <div className="container">
                 <div>
                     <Routes>
-                        <Route path={"/"} element={<LiveGames update={updates}/>}/>
+                        <Route path={"/"} element={<LiveGames/>}/>
                         <Route path={"/leagueTable"} element={<LeagueTable/>}/>
-                        <Route path={"/liveLeagueTable"} element={<LeagueTableLive update={updates}/>}/>
-                        <Route path={"/userControl"} element={<UserControl setUpdate={setUpdate}/>}/>
+                        <Route path={"/liveLeagueTable"} element={<LeagueTableLive/>}/>
+                        <Route path={"/userControl"} element={<UserControl/>}/>
                     </Routes>
                 </div>
             </div>

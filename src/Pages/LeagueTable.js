@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import {getLeagueTable} from "../services/GetTable";
-import DrawTable from "./DrawTable";
+import DrawTable from "../components/DrawTable";
 
 export default function LeagueTable() {
     const [leagueTable, setLeagueTable] = useState([]);

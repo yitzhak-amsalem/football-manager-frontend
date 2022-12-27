@@ -3,7 +3,6 @@ import "../css/Table.css"
 
 export default function DrawTable(props) {
     const leagueTable = props.table;
-
     return (
         <div id={"table-container"}>
             {

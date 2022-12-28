@@ -11,7 +11,7 @@ export default function LiveGames() {
             const games = response.data;
             setGames(games)
         })
-    }, )
+    },)
 
     return (
         <div className={"live-games"}>
@@ -19,13 +19,17 @@ export default function LiveGames() {
                 games.length === 0 ?
                     <h2 style={{color: "#0f1f54"}}>Oops! there are no live games.</h2>
                     :
-                    <div>
+                    <div className={"live-games"}>
                         <h2 className={"live-title"}>Live Games</h2>
-                        {games.map(game => {
-                            return (
-                                <LiveGameResults game={game}/>
-                            )
-                        })}
+                        {
+                            games.map((game, i) => {
+                                return (
+                                    <div key={i}>
+                                        <LiveGameResults game={game}/>
+                                    </div>
+                                )
+                            })
+                        }
                     </div>
             }
         </div>

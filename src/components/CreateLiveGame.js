@@ -32,6 +32,7 @@ function CreateLiveGame(props) {
         getUserLives(props.userToken, (response) => {
             const userGames = response.data;
             setUserGames(userGames);
+            console.log(userGames);
         })
     }
 
@@ -63,6 +64,7 @@ function CreateLiveGame(props) {
         }, (response) => {
             getUserGames();
             getAvailableGroups();
+
         })
     }
 
@@ -72,10 +74,10 @@ function CreateLiveGame(props) {
                 userGames.length > 0 ?
                     <div>
                         {
-                            userGames.map((game) => {
+                            userGames.map((game, i) => {
                                     return (
-                                        <div>
-                                            <UserLives updateGoals={updateGoals} endGame={endGame} game={game}/>
+                                        <div key={i}>
+                                            <UserLives updateGoals={updateGoals} endGame={endGame} game={game} index={i}/>
                                         </div>
                                     )
                                 }

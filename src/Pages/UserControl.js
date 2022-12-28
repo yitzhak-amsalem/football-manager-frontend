@@ -1,14 +1,13 @@
-import React, {useCallback, useEffect, useState} from "react";
+import React, {useState} from "react";
 import CreateLiveGame from "../components/CreateLiveGame";
 import {sendApiPostRequest} from "../services/ApiRequests";
 import "../css/logIn.css";
 import {TextField} from "@mui/material";
 
-
 function UserControl() {
     const [isActive, setIsActive] = useState(false);
     const [userName, setUserName] = useState("");
-    const [password, setPassword] = useState("");
+    const [password, setPassword] = useState("123456781");
     const [userToken, setUserToken] = useState("");
 
     const updateIsActive = () => {
@@ -16,6 +15,8 @@ function UserControl() {
             if (response.data.success) {
                 setIsActive(true);
                 setUserToken(response.data.userToken)
+                setUserName("");
+                setPassword("");
             } else {
                 if (response.data.errorCode === 1) {
                     alert("The password isn't correct");
@@ -75,10 +76,7 @@ function UserControl() {
                     </div>
             }
         </div>
-
     )
-
 }
-
 
 export default UserControl;

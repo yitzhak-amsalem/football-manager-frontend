@@ -8,6 +8,7 @@
     margin-top: 30px;
     padding: 5px;
     background-color: rgba(221, 246, 232, 0.7);
+    box-shadow: 0 0 15px #02864c;
     display: flex;
     align-items: start;
     flex-direction: column;
@@ -45,15 +46,18 @@ button {
     width: 45px;
     border-radius: 50%;
     border: 2px solid #00654c;
+    cursor: auto;
 
 }
 
-#add-game-button:hover {
+#add-game-button:hover:enabled {
     background-color: #01503d;
     transition: all 500ms;
     color: white;
     width: 45px;
     border-radius: 50%;
+    cursor: pointer;
+
 }
 
 #sign-out-button {
@@ -61,7 +65,7 @@ button {
     border: none;
     background-color: rgba(98, 245, 203, 0.8);
     margin-top: 50px;
-    border-radius: 10%;
+
 }
 
 #sign-out-button:hover {
@@ -75,11 +79,14 @@ button {
     font-family: 'Chivo Mono', monospace;
     border: none;
     background-color: #8fe1bc;
+    cursor: auto;
 }
 
-#sign-in-button:hover {
+#sign-in-button:hover:enabled {
     background-color: #00795a;
     transition: all 500ms;
     color: white;
+    cursor: pointer;
+
 }
 

@@ -70,10 +70,12 @@ h2 {
     width: 25px;
     font-size: small;
     border: 1px solid #00795a;
+    cursor: auto;
 }
-.goals-button:hover{
+.goals-button:hover:enabled{
     transition: all 500ms;
     background-color: #3efab1;
+    cursor: pointer;
 }
 .button-td{
     border-bottom: 2px solid #00795a;

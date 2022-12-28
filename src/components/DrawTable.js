@@ -26,7 +26,7 @@ export default function DrawTable(props) {
                     {
                         leagueTable.map((row, i) => {
                             return (
-                                <tr>
+                                <tr key={i}>
                                     <td>{i + 1}</td>
                                     <td>{row.groupName}</td>
                                     <td>{row.wins + row.losses + row.draws}</td>

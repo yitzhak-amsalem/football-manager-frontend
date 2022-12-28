@@ -1,8 +1,7 @@
 import React, {useEffect} from "react";
 import {useState} from "react";
-import {sendApiGetRequest, sendApiPostRequest} from "../services/ApiRequests";
-import UserLives from "./UserLives";
-import {getUserLives} from "../services/GetUserLives";
+import {sendApiGetRequest, sendApiPostRequest} from "../services/ApiUserRequests";
+import UserLiveGame from "./UserLiveGame";
 import "../css/logIn.css"
 import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 
@@ -29,11 +28,11 @@ function CreateLiveGame(props) {
     }
 
     const getUserGames = () => {
-        getUserLives(props.userToken, (response) => {
-            const userGames = response.data;
-            setUserGames(userGames);
-            console.log(userGames);
-        })
+        sendApiPostRequest("http://localhost:8989/get-live-games-per-user",
+            {token: props.userToken}, (response) => {
+                const userGames = response.data;
+                setUserGames(userGames);
+            })
     }
 
     const updateGroupA = (e) => {
@@ -77,7 +76,7 @@ function CreateLiveGame(props) {
                             userGames.map((game, i) => {
                                     return (
                                         <div key={i}>
-                                            <UserLives updateGoals={updateGoals} endGame={endGame} game={game} index={i}/>
+                                            <UserLiveGame updateGoals={updateGoals} endGame={endGame} game={game}/>
                                         </div>
                                     )
                                 }

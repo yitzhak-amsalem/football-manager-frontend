@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import CreateLiveGame from "../components/CreateLiveGame";
-import {sendApiPostRequest} from "../services/ApiRequests";
+import {sendApiPostRequest} from "../services/ApiUserRequests";
 import "../css/logIn.css";
 import {TextField} from "@mui/material";
 

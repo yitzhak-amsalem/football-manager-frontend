@@ -2,10 +2,7 @@ import React, {useState} from "react";
 import "../css/LiveGamesStyle.css"
 import "../css/logIn.css"
 
-export default function UserLives(props) {
-
-    const [goalsGroupA, setGoalsGroupA] = useState(props.game.goalsGroupA);
-    const [goalsGroupB, setGoalsGroupB] = useState(props.game.goalsGroupB);
+export default function UserLiveGame(props) {
     const groupA = props.game.groupA.groupName;
     const groupB = props.game.groupB.groupName;
     return (
@@ -15,12 +12,10 @@ export default function UserLives(props) {
                 <tr id={"live-games-tr"}>
                     <td className={"button-td"}>
                         <button className={"goals-button"} onClick={() => {
-                            setGoalsGroupA(goalsGroupA + 1)
                             props.updateGoals(props.game.goalsGroupA + 1, props.game.goalsGroupB, groupA, groupB)
                         }}>+
                         </button>
                         <button disabled={props.game.goalsGroupA === 0} className={"goals-button"} onClick={() => {
-                            setGoalsGroupA(goalsGroupA - 1)
                             props.updateGoals(props.game.goalsGroupA - 1, props.game.goalsGroupB, groupA, groupB)
                         }}>-
                         </button>
@@ -36,12 +31,10 @@ export default function UserLives(props) {
                     <td id={"right-td"}>{groupB}</td>
                     <td className={"button-td"}>
                         <button className={"goals-button"} onClick={() => {
-                            setGoalsGroupB(goalsGroupB + 1)
                             props.updateGoals(props.game.goalsGroupA, props.game.goalsGroupB + 1, groupA, groupB)
                         }}>+
                         </button>
                         <button disabled={props.game.goalsGroupB === 0} className={"goals-button"} onClick={() => {
-                            setGoalsGroupB(goalsGroupB - 1)
                             props.updateGoals(props.game.goalsGroupA, props.game.goalsGroupB - 1, groupA, groupB)
                         }}>-
                         </button>
@@ -50,7 +43,7 @@ export default function UserLives(props) {
                 </tbody>
             </table>
             <div>
-                <button id={"end-button"} onClick={() => props.endGame(groupA, groupB)}>End Game {props.index}</button>
+                <button id={"end-button"} onClick={() => props.endGame(groupA, groupB)}>End Game</button>
             </div>
 
         </div>

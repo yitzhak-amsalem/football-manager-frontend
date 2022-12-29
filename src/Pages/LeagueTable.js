@@ -6,7 +6,7 @@ export default function LeagueTable() {
     const [leagueTable, setLeagueTable] = useState([]);
 
     useEffect(() => {
-        getLeagueTable(false, (response) => {
+        getLeagueTable( (response) => {
             const updatedTable = response.data;
             setLeagueTable(updatedTable);
         })

@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import {getLeagueTable} from "../services/GetTable";
+import {getLeagueTableLive} from "../services/GetTable";
 import DrawTable from "../components/DrawTable";
 
 
@@ -8,7 +8,7 @@ export default function LeagueTableLive() {
     const [leagueTableLive, setLeagueTableLive] = useState([]);
 
     useEffect(() => {
-        getLeagueTable(true, (response) => {
+        getLeagueTableLive((response) => {
             const updatedTable = response.data;
             setLeagueTableLive(updatedTable);
         })

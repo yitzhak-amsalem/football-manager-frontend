@@ -7,7 +7,7 @@ import {TextField} from "@mui/material";
 function UserControl() {
     const [isActive, setIsActive] = useState(false);
     const [userName, setUserName] = useState("");
-    const [password, setPassword] = useState("123456781");
+    const [password, setPassword] = useState("");
     const [userToken, setUserToken] = useState("");
 
     const updateIsActive = () => {
@@ -35,6 +35,7 @@ function UserControl() {
     }
     const logOut = () => {
         setIsActive(false);
+        setUserToken("");
     }
 
     return (
